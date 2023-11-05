@@ -1,0 +1,29 @@
+.search {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.search input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: #fff;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  height: 1rem;
+  width: 1rem;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+}

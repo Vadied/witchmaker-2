@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        {children}
+        <div className="page">{children}</div>
       </body>
     </html>
   );

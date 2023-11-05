@@ -1,37 +1,39 @@
-"use client";
+import { Suspense } from "react";
 
-import { useRouter } from "next/navigation";
 import { ICampaign } from "@/models/campaign.model";
-import Button from "../components/button";
+
 import style from "./Campaigns.module.css";
-import CampaignCard from "../components/campaignCard";
 
-type Props = {};
-const CampaignList = ({}: Props) => {
-  const router = useRouter();
+import { getCampaigns } from "@/app/lib/campaigns";
+import CampaignList from "@/app/components/campaignList";
+import Search from "@/app/components/search";
 
-  const campaigns: ICampaign[] = [
-    { name: "test", _id: "1" },
-    { name: "test2", _id: "2" },
-  ];
-
-  const handleClick = () => {
-    router.push("/campaigns/new");
+type Props = {
+  searchParams?: {
+    query?: string;
+    page?: string;
   };
+};
+const Page = async ({ searchParams }: Props) => {
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 0;
 
   return (
-    <>
+    <div className={style.campaignList}>
       <h2 className={style.title}>
         <div>Campaigns</div>
-        <Button handleClick={handleClick}>New</Button>
       </h2>
+      <Search placeholder="Search Campaigns" />
       <div className={style.content}>
-        {campaigns.map((c: ICampaign) => (
-          <CampaignCard key={c._id} {...c} />
-        ))}
+        <Suspense>
+          <CampaignList query={query} currentPage={currentPage}/>
+        </Suspense>
       </div>
-    </>
+      <div className="mt-5 flex w-full justify-center">
+        {/* <Pagination totalPages={totalPages} /> */}
+      </div>
+    </div>
   );
 };
 
-export default CampaignList;
+export default Page;

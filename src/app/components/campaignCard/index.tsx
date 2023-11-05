@@ -1,6 +1,6 @@
-
-
+"use client";
 import { useRouter } from "next/navigation";
+import style from "./CampaignCard.module.css";
 import { ICampaign } from "@/models/campaign.model";
 
 import Button from "../button";
@@ -13,8 +13,8 @@ const CampaignCard = ({ _id, name }: ICampaign) => {
   };
 
   return (
-    <div>
-      <h3>Campaign {name}</h3>
+    <div className={style.campaignCard}>
+      <h3>{name}</h3>
       <div>
         <Button handleClick={navigateToCampaign}>Show</Button>
       </div>
