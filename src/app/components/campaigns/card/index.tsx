@@ -1,15 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
-import style from "./CampaignCard.module.css";
-import { ICampaign } from "@/models/campaign.model";
+import style from "./style.module.css";
+import { Campaign } from "@/models/campaign.model";
 
-import Button from "../button";
+import Button from "../../button";
 
-const CampaignCard = ({ _id, name }: ICampaign) => {
+const CampaignCard = ({ id, name }: Campaign) => {
   const router = useRouter();
 
   const navigateToCampaign = () => {
-    router.push(`campaigns/${_id}`);
+    router.push(`campaigns/${id}`);
   };
 
   return (

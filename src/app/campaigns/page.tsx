@@ -2,9 +2,9 @@ import { Suspense } from "react";
 
 import style from "./Campaigns.module.css";
 
-import { fetchCampaignsPages } from "@/app/lib/campaigns";
+import { fetchCampaignsPages } from "@/app/lib/campaigns/data";
 
-import CampaignList from "@/app/components/campaignList";
+import CampaignList from "@/app/components/campaigns/list";
 import Search from "@/app/components/search";
 import Pagination from "@/app/components/pagination";
 

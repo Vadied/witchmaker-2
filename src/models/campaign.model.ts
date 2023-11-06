@@ -1,10 +1,11 @@
-import { IUser } from "./user.model";
-
-export interface ICampaign {
-  _id: string;
+export type Campaign = {
+  id: string;
   name: string;
-  // closedAt: string;
-  // master: IUser | string;
-  // createdBy: IUser | string;
-  // createdAt: string;
-}
+  description: string;
+  start_date: string;
+  end_date: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  master: string;
+};
