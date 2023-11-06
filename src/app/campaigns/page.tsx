@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 
-import { ICampaign } from "@/models/campaign.model";
-
 import style from "./Campaigns.module.css";
 
-import { getCampaigns } from "@/app/lib/campaigns";
+import { fetchCampaignsPages } from "@/app/lib/campaigns";
+
 import CampaignList from "@/app/components/campaignList";
 import Search from "@/app/components/search";
+import Pagination from "@/app/components/pagination";
 
 type Props = {
   searchParams?: {
@@ -16,7 +16,9 @@ type Props = {
 };
 const Page = async ({ searchParams }: Props) => {
   const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 0;
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const totalPages = await fetchCampaignsPages(query);
 
   return (
     <div className={style.campaignList}>
@@ -30,7 +32,7 @@ const Page = async ({ searchParams }: Props) => {
         </Suspense>
       </div>
       <div className="mt-5 flex w-full justify-center">
-        {/* <Pagination totalPages={totalPages} /> */}
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );
