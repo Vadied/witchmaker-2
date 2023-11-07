@@ -47,3 +47,6 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+
+export const createSlug = () => Math.ceil(Math.random() * 1000000000).toString();

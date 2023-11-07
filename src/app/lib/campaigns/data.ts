@@ -1,11 +1,20 @@
-import { Campaign } from "@/models/campaign.model";
 import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
+
+import { Campaign } from "@/models/campaign.model";
 
 import { ITEMS_PER_PAGE } from "@/app/assets/constants";
 
 export const getCampaigns = async () => {
+  // Add noStore() here prevent the response from being cached.
+  noStore();
   try {
-    const { rows } = await sql`SELECT * FROM campaigns`;
+    const { rows } = await sql`
+      SELECT * 
+      FROM campaigns
+      JOIN users 
+        ON campaigns.master = users.id
+    `;
     return rows as Campaign[];
   } catch (error) {
     console.error("Database Error:", error);
@@ -13,9 +22,16 @@ export const getCampaigns = async () => {
   }
 };
 
-export const getCampaign = async (id: string) => {
+export const getCampaign = async (slug: string) => {
+  noStore();
   try {
-    const { rows } = await sql`SELECT * FROM campaigns WHERE id = ${id}`;
+    const { rows } = await sql`
+      SELECT * 
+      FROM campaigns
+      JOIN users 
+        ON campaigns.master = users.id
+      WHERE slug = ${slug}
+    `;
     if (rows.length === 0) return null;
 
     return (rows as Campaign[])[0];
@@ -30,14 +46,18 @@ export const getCampaignsFiltered = async (
   currentPage: number
 ) => {
   if (currentPage < 1) return [];
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const { rows } = await sql`
         SELECT * 
-        FROM campaigns 
-        WHERE name ILIKE ${"%" + query + "%"}
+        FROM campaigns      
+        JOIN users 
+          ON campaigns.master = users.id
+        WHERE name ILIKE ${`%${query}%`}
         LIMIT ${ITEMS_PER_PAGE} 
-        OFFSET ${(currentPage - 1) * ITEMS_PER_PAGE}
+        OFFSET ${offset}
     `;
     return rows as Campaign[];
   } catch (error) {

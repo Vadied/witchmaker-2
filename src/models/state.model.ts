@@ -1,4 +1,4 @@
-export interface IState {
+export type State = {
   language: string;
   t(key: string): string;
-}
+};

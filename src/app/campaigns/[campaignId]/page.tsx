@@ -2,10 +2,10 @@ import style from "./style.module.css";
 
 import { getCampaign } from "@/app/lib/campaigns/data";
 
-type Props = { params: { campaignId: string } };
+type Props = { params: { slug: string } };
 const Page = async ({ params }: Props) => {
 
-  const campaign = await getCampaign(params.campaignId);
+  const campaign = await getCampaign(params.slug);
 
   if (!campaign) return <div>No data recovered</div>;
 

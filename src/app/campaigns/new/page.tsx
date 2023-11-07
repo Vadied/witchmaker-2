@@ -1,8 +1,4 @@
-import { ChangeEvent, useState } from "react";
-import { useRouter } from "next/navigation";
-
-import { Campaign } from "@/models/campaign.model";
-import Button from "../../components/button";
+import Form from "@/app/components/campaigns/form";
 
 type Props = {};
 const Page = ({}: Props) => {
@@ -12,6 +8,7 @@ const Page = ({}: Props) => {
       <h2 className="title">
         <div>New Campaign</div>
       </h2>
+      <Form />
     </>
   );
 };
