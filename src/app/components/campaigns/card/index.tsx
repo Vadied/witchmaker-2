@@ -1,13 +1,19 @@
-import style from "./style.module.css";
-
-import Button from "@/app/components/button";
 import Link from "next/link";
 
+import style from "./style.module.css";
+
+import { deleteCampaign } from "@/app/lib/campaigns/actions";
+
+import Button from "@/app/components/button";
+
 type Props = {
+  _id: string;
   name: string;
   slug: string;
 };
-const Card = ({ name, slug }: Props) => {
+const Card = ({ _id, name, slug }: Props) => {
+  const deleteInvoiceWithId = deleteCampaign.bind(null, _id);
+
   return (
     <div className={style.card}>
       <h3>{name}</h3>
@@ -18,6 +24,11 @@ const Card = ({ name, slug }: Props) => {
         <Link href={`/campaigns/${slug}/edit`}>
           <Button>Edit</Button>
         </Link>
+        <form action={deleteInvoiceWithId}>
+          <button>
+            <Button type="danger">Delete</Button>
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const List = async ({ query, currentPage }: Props) => {
   return (
     <div className={style.list}>
       {campaigns.map((c) => (
-        <Card key={c.slug} name={c.name} slug={c.slug} />
+        <Card key={c.slug} _id={c._id.toString()} name={c.name} slug={c.slug} />
       ))}
     </div>
   );

@@ -139,7 +139,7 @@ export const updateCampaign = async (
     );
   } catch (error) {
     return {
-      message: "Database Error: Failed to Update Invoice.",
+      message: "Database Error: Failed to Update Campaign.",
     };
   }
 
@@ -147,10 +147,11 @@ export const updateCampaign = async (
   redirect(`/campaigns/${ref.slug}`);
 };
 
-export const deleteInvoice = async (id: string) => {
+export const deleteCampaign = async (_id: string) => {
   try {
+    console.log("deleteCampaign", _id);
     await connect();
-    Campaign.deleteOne({ id });
+    await Campaign.deleteOne({ _id });
 
     revalidatePath("/campaigns");
     return { message: "Deleted Campaign" };
