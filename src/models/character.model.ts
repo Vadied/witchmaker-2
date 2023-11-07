@@ -1,4 +1,4 @@
-import { ICampaign } from "./campaign.model";
+import { TCampaign } from "./campaign.model";
 import { IClass } from "./class.model";
 import { IUser } from "./user.model";
 
@@ -7,7 +7,7 @@ export interface ICharacter {
   name: string;
   level: number;
   classes: IClass[];
-  campaign: ICampaign;
+  campaign: TCampaign;
   createdBy: IUser;
   createdAt: string;
 }
