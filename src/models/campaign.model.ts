@@ -34,24 +34,17 @@ const campaignSchema = new Schema(
 );
 
 export type TCampaign = {
+  _id: string;
   name: string;
   slug: string;
   description: string;
-  id: string;
+  start_date: string;
+  end_date: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  master: string;
 };
 
 export const Campaign =
   mongoose.models.Campaign || mongoose.model("Campaign", campaignSchema);
-
-// export type Campaign = {
-//   id: string;
-//   slug: string;
-//   name: string;
-//   description: string;
-//   start_date: string;
-//   end_date: string;
-//   status: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   master: string;
-// };

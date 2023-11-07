@@ -9,12 +9,15 @@ type Props = {
 };
 const Card = ({ name, slug }: Props) => {
   return (
-    <div className={style.campaignCard}>
+    <div className={style.card}>
       <h3>{name}</h3>
-      <div>
-        <Button>
-          <Link href={`campaigns/${slug}`}>Show</Link>
-        </Button>
+      <div className={style.actions}>
+        <Link href={`/campaigns/${slug}`}>
+          <Button>Show</Button>
+        </Link>
+        <Link href={`/campaigns/${slug}/edit`}>
+          <Button>Edit</Button>
+        </Link>
       </div>
     </div>
   );

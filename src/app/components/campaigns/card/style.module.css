@@ -1,4 +1,9 @@
-.campaignCard {
+.card {
   background-color: aliceblue;
   padding: 5px 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
 }

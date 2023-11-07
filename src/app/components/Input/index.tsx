@@ -8,15 +8,16 @@ type Props = {
   placeholder?: string;
   className?: string;
   errors?: FormErrors;
+  value?: any;
 };
-const Input = ({ label, name, errors, ...rest }: Props) => {
+const Input = ({ label, name, value, errors, ...rest }: Props) => {
   return (
     <div className={style.input}>
       <label htmlFor={name} className={style.label}>
         {label}
       </label>
       <div>
-        <input id={name} name={name} {...rest} />
+        <input id={name} name={name} defaultValue={value} {...rest} />
       </div>
       {errors?.[name] ? (
         <div className={style.error}>

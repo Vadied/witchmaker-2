@@ -42,6 +42,7 @@ const UpdateCampaign = FormSchema.omit({
   slug: true,
   createdAt: true,
   updatedAt: true,
+  master: true,
 });
 
 const getSlug = async (): Promise<string> => {
@@ -56,7 +57,6 @@ export const createCampaign = async (
   prevState: FormState,
   formData: FormData
 ) => {
-  console.log("formData", formData.get("name"))
   // Validate form fields using Zod
   const validatedFields = CreateCampaign.safeParse({
     name: formData.get("name"),
@@ -83,7 +83,6 @@ export const createCampaign = async (
       slug,
       description: "",
       start_date: date,
-      end_date: "",
       master,
       createdAt: date,
       updatedAt: date,
@@ -128,7 +127,7 @@ export const updateCampaign = async (
   try {
     await connect();
     await Campaign.updateOne(
-      { id: ref.id },
+      { _id: ref._id },
       {
         name,
         description,
@@ -144,8 +143,8 @@ export const updateCampaign = async (
     };
   }
 
-  revalidatePath("/campaigns/[[...slug]]");
-  redirect("/campaigns/[[...slug]]");
+  revalidatePath(`/campaigns/${ref.slug}`);
+  redirect(`/campaigns/${ref.slug}`);
 };
 
 export const deleteInvoice = async (id: string) => {

@@ -6,7 +6,6 @@ import { useFormState } from "react-dom";
 import style from "./style.module.css";
 
 import { FormState } from "@/models/response.model";
-import { Campaign } from "@/models/campaign.model";
 
 import { updateCampaign } from "@/app/lib/campaigns/actions";
 
@@ -14,13 +13,27 @@ import Button from "@/app/components/button";
 import Input from "@/app/components/Input";
 
 type Props = {
-  campaign: Campaign;
+  _id: string;
+  slug: string;
+  name: string;
+  description: string;
+  start_date: string;
+  end_date: string;
+  status: string;
 };
-export default function CreateForm({ campaign }: Props) {
+export default function CreateForm({
+  _id,
+  slug,
+  name,
+  description,
+  start_date,
+  end_date,
+  status,
+}: Props) {
   const initialState: FormState = { message: null, errors: {} };
   const updateWithRef = updateCampaign.bind(null, {
-    id: campaign.id,
-    slug: campaign.slug,
+    _id: _id,
+    slug: slug,
   });
   const [state, dispatch] = useFormState(updateWithRef, initialState);
 
@@ -30,42 +43,47 @@ export default function CreateForm({ campaign }: Props) {
         <Input
           label="Name"
           name="name"
+          value={name}
           placeholder="Insert name"
           errors={state.errors}
         />
         <Input
           label="Description"
           name="description"
+          value={description}
           placeholder="Insert description"
           errors={state.errors}
         />
         <Input
           label="Start Date"
           name="start_date"
+          value={start_date}
           placeholder="Insert Start Date"
           errors={state.errors}
         />
         <Input
           label="End Date"
           name="end_date"
+          value={end_date}
           placeholder="Insert End Date"
           errors={state.errors}
         />
         <Input
           label="Status"
           name="status"
+          value={status}
           placeholder="Insert status"
           errors={state.errors}
         />
       </div>
 
       <div className={style.actions}>
-        <Button type="secondary">
-          <Link href={`/campaigns/${campaign.slug}`}>Cancel</Link>
-        </Button>
-        <Button>
-          <button type="submit">Update Campaign</button>
-        </Button>
+        <Link href={`/campaigns/${slug}`}>
+          <Button type="secondary">Cancel</Button>
+        </Link>
+        <button type="submit">
+          <Button>Update Campaign</Button>
+        </button>
       </div>
     </form>
   );

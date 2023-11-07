@@ -12,6 +12,6 @@ export type FormState = {
 };
 
 export type Reference = {
-  id: string;
+  _id: string;
   slug: string;
 }
