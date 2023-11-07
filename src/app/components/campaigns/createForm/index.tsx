@@ -5,18 +5,14 @@ import { useFormState } from "react-dom";
 
 import style from "./style.module.css";
 
-import { createCampaign } from "@/app/lib/campaigns/actions";
-
 import { FormState } from "@/models/response.model";
+
+import { createCampaign } from "@/app/lib/campaigns/actions";
 
 import Button from "@/app/components/button";
 import Input from "@/app/components/Input";
 
-type Props = {
-  confirmLabel: string;
-  oldUrl: string;
-};
-export default function Form({ confirmLabel, oldUrl }: Props) {
+export default function CreateForm() {
   const initialState: FormState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createCampaign, initialState);
 
@@ -26,17 +22,17 @@ export default function Form({ confirmLabel, oldUrl }: Props) {
         <Input
           label="Name"
           name="name"
-          placeholder="Inserisci nome"
+          placeholder="Insert name"
           errors={state.errors}
         />
       </div>
 
       <div className={style.actions}>
         <Button type="secondary">
-          <Link href={oldUrl}>Cancel</Link>
+          <Link href="/campaigns">Cancel</Link>
         </Button>
         <Button>
-          <button type="submit">{confirmLabel}</button>
+          <button type="submit">Create Campaign</button>
         </Button>
       </div>
     </form>

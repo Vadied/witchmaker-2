@@ -10,3 +10,8 @@ export type FormState = {
   message: string | null;
   errors?: FormErrors;
 };
+
+export type Reference = {
+  id: string;
+  slug: string;
+}

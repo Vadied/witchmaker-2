@@ -1,5 +1,7 @@
+import style from "./style.module.css";
+
 import Breadcrumbs from "@/app/components/breadcrumbs";
-import Form from "@/app/components/campaigns/form";
+import Form from "@/app/components/campaigns/createForm";
 
 type Props = {};
 const Page = ({}: Props) => {
@@ -14,10 +16,10 @@ const Page = ({}: Props) => {
           },
         ]}
       />
-      <h2 className="title">
+      <h2 className={style.title}>
         <div>New Campaign</div>
       </h2>
-      <Form confirmLabel="Create Campaign" oldUrl="/campaigns" />
+      <Form />
     </>
   );
 };

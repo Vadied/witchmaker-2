@@ -1,7 +1,7 @@
-import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
+import connect from "@/app/lib/db/database";
 
-import { Campaign } from "@/models/campaign.model";
+import { Campaign, TCampaign } from "@/models/campaign.model";
 
 import { ITEMS_PER_PAGE } from "@/app/assets/constants";
 
@@ -9,13 +9,9 @@ export const getCampaigns = async () => {
   // Add noStore() here prevent the response from being cached.
   noStore();
   try {
-    const { rows } = await sql`
-      SELECT * 
-      FROM campaigns
-      JOIN users 
-        ON campaigns.master = users.id
-    `;
-    return rows as Campaign[];
+    await connect();
+    const data = await Campaign.find();
+    return data;
   } catch (error) {
     console.error("Database Error:", error);
     return [];
@@ -25,16 +21,9 @@ export const getCampaigns = async () => {
 export const getCampaign = async (slug: string) => {
   noStore();
   try {
-    const { rows } = await sql`
-      SELECT * 
-      FROM campaigns
-      JOIN users 
-        ON campaigns.master = users.id
-      WHERE slug = ${slug}
-    `;
-    if (rows.length === 0) return null;
-
-    return (rows as Campaign[])[0];
+    await connect();
+    const data = Campaign.findOne({ slug });
+    return data;
   } catch (error) {
     console.error("Database Error:", error);
     return null;
@@ -46,20 +35,16 @@ export const getCampaignsFiltered = async (
   currentPage: number
 ) => {
   if (currentPage < 1) return [];
+
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-
   try {
-    const { rows } = await sql`
-        SELECT * 
-        FROM campaigns      
-        JOIN users 
-          ON campaigns.master = users.id
-        WHERE name ILIKE ${`%${query}%`}
-        LIMIT ${ITEMS_PER_PAGE} 
-        OFFSET ${offset}
-    `;
-    return rows as Campaign[];
+    await connect();
+    const data = await Campaign.find({ name: { $regex: query } })
+      .skip(offset)
+      .limit(ITEMS_PER_PAGE);
+
+    return data as TCampaign[];
   } catch (error) {
     console.error("Database Error:", error);
     return [];
@@ -68,11 +53,9 @@ export const getCampaignsFiltered = async (
 
 export const fetchCampaignsPages = async (query: string) => {
   try {
-    const count = await sql`
-    SELECT COUNT(*) FROM campaigns
-  `;
-    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
-    return totalPages;
+    await connect();
+    const count = await Campaign.countDocuments({ name: { $regex: query } });
+    return Math.ceil(Number(count) / ITEMS_PER_PAGE);
   } catch (error) {
     console.error("Database Error:", error);
     return 0;

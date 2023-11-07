@@ -1,3 +1,5 @@
+"use client";
+
 import style from "./style.module.css";
 
 export type Props = {
@@ -7,7 +9,7 @@ export type Props = {
   enabled?: boolean;
   isLink?: boolean;
   customClasses?: string;
-  handleClick?(): void;
+  // handleClick?(): void;
   children: JSX.Element | string;
 };
 
@@ -16,13 +18,13 @@ const Button = ({
   id = "",
   enabled = true,
   customClasses = "",
-  handleClick,
+  // handleClick,
   children,
 }: Props) => {
   const enabledClass = (enabled && "cursor-pointer") || "";
   const onClick = () => {
-    if (!enabled || !handleClick) return;
-    handleClick();
+    // if (!enabled || !handleClick) return;
+    // handleClick();
   };
 
   return (

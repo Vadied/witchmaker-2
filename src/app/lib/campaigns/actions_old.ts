@@ -1,14 +1,13 @@
 "use server";
 
 import { z } from "zod";
+import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import connect from "@/app/lib/db/database";
-import { createSlug } from "@/app/lib/utils";
-
-import { Campaign } from "@/models/campaign.model";
 import { FormState, Reference } from "@/models/response.model";
+
+import { createSlug } from "@/app/lib/utils";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -34,7 +33,6 @@ const CreateCampaign = FormSchema.omit({
   status: true,
   createdAt: true,
   updatedAt: true,
-  master: true,
 });
 
 const UpdateCampaign = FormSchema.omit({
@@ -46,17 +44,14 @@ const UpdateCampaign = FormSchema.omit({
 
 const getSlug = async (): Promise<string> => {
   const slug = createSlug();
-  const count = await Campaign.countDocuments({ slug });
-  if (!Number(count)) return slug;
+  const count =
+    await sql`SELECT COUNT(*) FROM campaigns WHERE slug = '${slug}'`;
+  if (!Number(count.rows[0].count)) return slug;
 
   return getSlug();
 };
 
-export const createCampaign = async (
-  prevState: FormState,
-  formData: FormData
-) => {
-  console.log("formData", formData.get("name"))
+export const createCampaign = async (prevState: FormState, formData: FormData) => {
   // Validate form fields using Zod
   const validatedFields = CreateCampaign.safeParse({
     name: formData.get("name"),
@@ -73,25 +68,18 @@ export const createCampaign = async (
   // Prepare data for insertion into the database
   const { name } = validatedFields.data;
   // TODO dinamico
-  const master = "654a5261d57c7929936284e4";
+  const master = "ca6260f9-a55e-40be-99e6-56ab5f5d441f"; 
   const date = new Date().toISOString().split("T")[0];
   try {
-    await connect();
     const slug = await getSlug();
-    await Campaign.create({
-      name,
-      slug,
-      description: "",
-      start_date: date,
-      end_date: "",
-      master,
-      createdAt: date,
-      updatedAt: date,
-    });
+    await sql`
+    INSERT INTO campaigns (name, createdAt, updatedAt, master, slug)
+    VALUES (${name}, ${date}, ${date}, ${master}, ${slug})
+  `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: "Database Error: Failed to Create Campaign.",
+      message: "Database Error: Failed to Create Invoice.",
     };
   }
 
@@ -126,18 +114,11 @@ export const updateCampaign = async (
     validatedFields.data;
   const date = new Date().toISOString().split("T")[0];
   try {
-    await connect();
-    await Campaign.updateOne(
-      { id: ref.id },
-      {
-        name,
-        description,
-        start_date,
-        end_date,
-        status,
-        updatedAt: date,
-      }
-    );
+    await sql`
+    UPDATE campaigns 
+    SET name = ${name}, description = ${description}, start_date = ${start_date}, end_date = ${end_date}, status = ${status}, updatedAt = ${date}
+    WHERE id = ${ref.id}
+  `;
   } catch (error) {
     return {
       message: "Database Error: Failed to Update Invoice.",
@@ -150,9 +131,7 @@ export const updateCampaign = async (
 
 export const deleteInvoice = async (id: string) => {
   try {
-    await connect();
-    Campaign.deleteOne({ id });
-
+    await sql`DELETE FROM campaigns WHERE id = ${id}`;
     revalidatePath("/campaigns");
     return { message: "Deleted Campaign" };
   } catch (error) {

@@ -1,25 +1,23 @@
-"use client";
-import { useRouter } from "next/navigation";
 import style from "./style.module.css";
-import { Campaign } from "@/models/campaign.model";
 
-import Button from "../../button";
+import Button from "@/app/components/button";
+import Link from "next/link";
 
-const CampaignCard = ({ id, name }: Campaign) => {
-  const router = useRouter();
-
-  const navigateToCampaign = () => {
-    router.push(`campaigns/${id}`);
-  };
-
+type Props = {
+  name: string;
+  slug: string;
+};
+const Card = ({ name, slug }: Props) => {
   return (
     <div className={style.campaignCard}>
       <h3>{name}</h3>
       <div>
-        <Button handleClick={navigateToCampaign}>Show</Button>
+        <Button>
+          <Link href={`campaigns/${slug}`}>Show</Link>
+        </Button>
       </div>
     </div>
   );
 };
 
-export default CampaignCard;
+export default Card;

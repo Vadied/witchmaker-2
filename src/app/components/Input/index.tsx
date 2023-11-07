@@ -16,7 +16,7 @@ const Input = ({ label, name, errors, ...rest }: Props) => {
         {label}
       </label>
       <div>
-        <input id={name} {...rest} />
+        <input id={name} name={name} {...rest} />
       </div>
       {errors?.[name] ? (
         <div className={style.error}>

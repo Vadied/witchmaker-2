@@ -1,4 +1,7 @@
-const { db } = require("@vercel/postgres");
+import { sql } from '@vercel/postgres'
+import { db } from '@/lib/drizzle'
+import { UsersTable, User, NewUser } from './drizzle'
+
 const {
   campaigns,
   classes,
@@ -7,12 +10,12 @@ const {
 } = require("../app/lib/placeholder-data.js");
 const bcrypt = require("bcrypt");
 
-async function seedUsers(client) {
+async function seedUsers() {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+    await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
     // Create the "users" table if it doesn't exist
-    const createTable = await client.sql`
+    const createTable = await sql`
       CREATE TABLE IF NOT EXISTS users (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -26,16 +29,10 @@ async function seedUsers(client) {
     console.log(`Created "users" table`);
 
     // Insert data into the "users" table
-    const insertedUsers = await Promise.all(
-      users.map(async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
-        return client.sql`
-        INSERT INTO users (id, name, email, password)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
-        ON CONFLICT (id) DO NOTHING;
-      `;
-      })
-    );
+    const insertedUsers: User[] = await db
+    .insert(UsersTable)
+    .values(newUsers)
+    .returning()
 
     console.log(`Seeded ${insertedUsers.length} users`);
 
