@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import Breadcrumbs from "@/app/components/breadcrumbs";
 import style from "./style.module.css";
 
@@ -7,7 +9,7 @@ type Props = { params: { slug: string } };
 const Page = async ({ params }: Props) => {
   const campaign = await getCampaign(params.slug);
 
-  if (!campaign) return <div>No data recovered</div>;
+  if (!campaign) notFound();
 
   return (
     <div className="campaign-details">

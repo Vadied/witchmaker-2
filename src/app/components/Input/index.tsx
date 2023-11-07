@@ -17,10 +17,16 @@ const Input = ({ label, name, value, errors, ...rest }: Props) => {
         {label}
       </label>
       <div>
-        <input id={name} name={name} defaultValue={value} {...rest} />
+        <input
+          id={name}
+          name={name}
+          defaultValue={value}
+          {...rest}
+          aria-describedby={`${name}-error`}
+        />
       </div>
       {errors?.[name] ? (
-        <div className={style.error}>
+        <div id={`${name}-error`} aria-live="polite" className={style.error}>
           {errors?.[name].map((error: string) => (
             <p key={error}>{error}</p>
           ))}

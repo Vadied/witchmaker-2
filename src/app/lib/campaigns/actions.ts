@@ -149,7 +149,6 @@ export const updateCampaign = async (
 
 export const deleteCampaign = async (_id: string) => {
   try {
-    console.log("deleteCampaign", _id);
     await connect();
     await Campaign.deleteOne({ _id });
 
