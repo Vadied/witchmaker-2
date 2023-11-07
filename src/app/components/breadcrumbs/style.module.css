@@ -1,0 +1,15 @@
+.navigation {
+    margin-bottom: 1.5rem;
+}
+
+.list {
+    display: flex;
+}
+
+.item.active {
+    color: black;
+}
+
+.separator {
+    margin: 0 0.5rem;
+}

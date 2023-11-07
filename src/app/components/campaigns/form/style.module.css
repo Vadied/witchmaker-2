@@ -1,4 +1,17 @@
-.campaignList {
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.actions {
   display: flex;
   gap: 10px;
+  justify-content: flex-end;
 }

@@ -5,6 +5,8 @@ import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import { FormState } from "@/models/response.model";
+
 import { createSlug } from "@/app/lib/utils";
 
 const FormSchema = z.object({
@@ -40,14 +42,6 @@ const UpdateCampaign = FormSchema.omit({
   updatedAt: true,
 });
 
-// This is temporary
-export type State = {
-  errors?: {
-    name?: string[];
-  };
-  message?: string | null;
-};
-
 const getSlug = async (): Promise<string> => {
   const slug = createSlug();
   const count =
@@ -57,7 +51,7 @@ const getSlug = async (): Promise<string> => {
   return getSlug();
 };
 
-export const createCampaign = async (prevState: State, formData: FormData) => {
+export const createCampaign = async (prevState: FormState, formData: FormData) => {
   // Validate form fields using Zod
   const validatedFields = CreateCampaign.safeParse({
     name: formData.get("name"),
@@ -73,7 +67,8 @@ export const createCampaign = async (prevState: State, formData: FormData) => {
 
   // Prepare data for insertion into the database
   const { name } = validatedFields.data;
-  const master = "ca6260f9-a55e-40be-99e6-56ab5f5d441f"; // TODO dinamico
+  // TODO dinamico
+  const master = "ca6260f9-a55e-40be-99e6-56ab5f5d441f"; 
   const date = new Date().toISOString().split("T")[0];
   try {
     const slug = await getSlug();
@@ -94,7 +89,7 @@ export const createCampaign = async (prevState: State, formData: FormData) => {
 
 export const updateCampaign = async (
   id: string,
-  prevState: State,
+  prevState: FormState,
   formData: FormData
 ) => {
   // Validate form fields using Zod

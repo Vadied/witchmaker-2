@@ -8,5 +8,5 @@ export type FormErrors = {
 
 export type FormState = {
   message: string | null;
-  errors: FormErrors;
+  errors?: FormErrors;
 };

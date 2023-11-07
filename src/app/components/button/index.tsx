@@ -1,7 +1,8 @@
-import style from "./Button.module.css";
+import style from "./style.module.css";
 
 export type Props = {
   type?: string;
+  action?: "button" | "submit" | "reset" | undefined;
   id?: string;
   enabled?: boolean;
   isLink?: boolean;

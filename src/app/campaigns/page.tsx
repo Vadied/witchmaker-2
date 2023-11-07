@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import style from "./Campaigns.module.css";
+import style from "./style.module.css";
 
 import { fetchCampaignsPages } from "@/app/lib/campaigns/data";
 
