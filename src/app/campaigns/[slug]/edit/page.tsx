@@ -2,12 +2,14 @@ import style from "./style.module.css";
 
 import { getCampaign } from "@/app/lib/campaigns/data";
 
+import { TCampaign } from "@/models/campaign.model";
+
 import Breadcrumbs from "@/app/components/breadcrumbs";
 import Form from "@/app/components/campaigns/editForm";
 
 type Props = { params: { slug: string } };
 const Page = async ({ params }: Props) => {
-  const campaign = await getCampaign(params.slug);
+  const campaign: TCampaign = await getCampaign(params.slug);
 
   if (!campaign) return <div>No data recovered</div>;
 
@@ -27,7 +29,15 @@ const Page = async ({ params }: Props) => {
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <h2 className={style.title}>{campaign.name} Edit</h2>
-      <Form campaign={campaign} />
+      <Form
+        _id={campaign._id.toString()}
+        name={campaign.name}
+        slug={campaign.slug}
+        description={campaign.description}
+        start_date={campaign.start_date}
+        end_date={campaign.end_date}
+        status={campaign.status}
+      />
     </>
   );
 };
