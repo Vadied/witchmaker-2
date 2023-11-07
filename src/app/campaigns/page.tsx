@@ -4,10 +4,10 @@ import style from "./style.module.css";
 
 import { fetchCampaignsPages } from "@/app/lib/campaigns/data";
 
-import CampaignList from "@/app/components/campaigns/list";
-import Search from "@/app/components/search";
-import Pagination from "@/app/components/pagination";
-import Button from "@/app/components/button";
+import CampaignList from "@/app/ui/campaings/list";
+import Search from "@/app/ui/search";
+import Pagination from "@/app/ui/pagination";
+import Button from "@/app/ui/button";
 import Link from "next/link";
 
 type Props = {

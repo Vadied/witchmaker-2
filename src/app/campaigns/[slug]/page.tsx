@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import Breadcrumbs from "@/app/components/breadcrumbs";
+import Breadcrumbs from "@/app/ui/breadcrumbs";
 import style from "./style.module.css";
 
 import { getCampaign } from "@/app/lib/campaigns/data";

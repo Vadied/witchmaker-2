@@ -1,7 +1,7 @@
 import style from "./style.module.css";
 
 import { getCampaignsFiltered } from "@/app/lib/campaigns/data";
-import Card from "@/app/components/campaigns/card";
+import Card from "@/app/ui/campaings/card";
 
 type Props = { query: string; currentPage: number };
 const List = async ({ query, currentPage }: Props) => {

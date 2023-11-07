@@ -9,8 +9,8 @@ import { FormState } from "@/models/response.model";
 
 import { createCampaign } from "@/app/lib/campaigns/actions";
 
-import Button from "@/app/components/button";
-import Input from "@/app/components/Input";
+import Button from "@/app/ui/button";
+import Input from "@/app/ui/Input";
 
 export default function CreateForm() {
   const initialState: FormState = { message: null, errors: {} };

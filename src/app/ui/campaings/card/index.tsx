@@ -4,7 +4,7 @@ import style from "./style.module.css";
 
 import { deleteCampaign } from "@/app/lib/campaigns/actions";
 
-import Button from "@/app/components/button";
+import Button from "@/app/ui/button";
 
 type Props = {
   _id: string;
