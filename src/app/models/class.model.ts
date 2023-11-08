@@ -1,42 +1,42 @@
 type ability = "str" | "dex" | "con" | "int" | "wis" | "cha";
 
-interface IEntry {
+type TEntry = {
   type: string;
   entry: string | string[];
-}
+};
 
-interface IFeature {
+type TFeature = {
   name: string;
   source: string;
   page: number;
   level: number;
-  entries: IEntry[];
-}
+  entries: TEntry[];
+};
 
-interface ISubclass {
+type TSubclass = {
   name: string;
   features: string[];
-}
+};
 
-interface IOptionalFeatureProg {
+type TOptionalFeatureProg = {
   name: string;
   type: string[];
   progression: number[];
-}
+};
 
-interface ITable {
+type TTable = {
   cols: string[];
   rows: number[][];
-}
+};
 
-interface ISpellSettings {
+type TSpellSettings = {
   ability: ability;
   progression: string;
   prepared: string;
   cantrip: number[];
-}
+};
 
-interface IProficiencies {
+type TProficiencies = {
   saving: ability[];
   armors: string[];
   weapons: string[];
@@ -45,29 +45,30 @@ interface IProficiencies {
     choose: string[];
     chooseCount: number;
   };
-}
+};
 
-interface IDice {
+type TDice = {
   quantity: number;
   faces: number;
-}
+};
 
-interface IClassSettings {
+type TClassSettings = {
   name: string;
   source: string;
   page: number;
-  proficiency: IProficiencies;
-  spell: ISpellSettings;
-  optionalProg: IOptionalFeatureProg;
-  hitDice: IDice;
-  tables: ITable;
-  subClasses: ISubclass[];
+  proficiency: TProficiencies;
+  spell: TSpellSettings;
+  optionalProg: TOptionalFeatureProg[];
+  hitDice: TDice;
+  tables: TTable[];
+  subClasses: TSubclass[];
   features: {
-    class: IFeature[];
-    subClass: IFeature[];
+    class: TFeature[];
+    subClass: TFeature[];
   };
-}
-export interface IClass {
+};
+
+export type TClass = {
   code: string;
-  class: IClassSettings;
-}
+  class: TClassSettings;
+};

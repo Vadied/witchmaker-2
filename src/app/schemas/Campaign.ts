@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import autopopulate from "mongoose-autopopulate";
 
 const { Schema } = mongoose;
 
-const campaignSchema = new Schema(
+const schema = new Schema(
   {
     slug: {
       type: String,
@@ -29,22 +30,17 @@ const campaignSchema = new Schema(
       required: true,
       ref: "User",
     },
+    characters: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Character",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-export type TCampaign = {
-  _id: string;
-  name: string;
-  slug: string;
-  description: string;
-  start_date: string;
-  end_date: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  master: string;
-};
+schema.plugin(autopopulate);
 
 export const Campaign =
-  mongoose.models.Campaign || mongoose.model("Campaign", campaignSchema);
+  mongoose.models.Campaign || mongoose.model("Campaign", schema);

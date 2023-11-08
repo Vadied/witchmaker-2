@@ -1,7 +1,9 @@
 import { unstable_noStore as noStore } from "next/cache";
+
 import connect from "@/app/lib/db/database";
 
-import { Campaign, TCampaign } from "@/models/campaign.model";
+import { Campaign } from "@/app/schemas/Campaign";
+import { TCampaign } from "@/app/models/campaign.model";
 
 import { ITEMS_PER_PAGE } from "@/app/assets/constants";
 

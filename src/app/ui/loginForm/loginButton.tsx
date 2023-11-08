@@ -9,7 +9,9 @@ export default function LoginButton() {
 
   return (
     <Button aria-disabled={pending}>
-      Log in <ArrowRightIcon />
+      <div>
+        Log in <ArrowRightIcon />
+      </div>
     </Button>
   );
 }

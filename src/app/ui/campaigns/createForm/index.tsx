@@ -5,7 +5,7 @@ import { useFormState } from "react-dom";
 
 import style from "./style.module.css";
 
-import { FormState } from "@/models/response.model";
+import { FormState } from "@/app/models/response.model";
 
 import { createCampaign } from "@/app/lib/campaigns/actions";
 

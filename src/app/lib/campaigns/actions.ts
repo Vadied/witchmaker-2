@@ -7,8 +7,8 @@ import { redirect } from "next/navigation";
 import connect from "@/app/lib/db/database";
 import { createSlug } from "@/app/lib/utils";
 
-import { Campaign } from "@/models/campaign.model";
-import { FormState, Reference } from "@/models/response.model";
+import { Campaign } from "@/app/schemas/Campaign";
+import { FormState, Reference } from "@/app/models/response.model";
 
 const FormSchema = z.object({
   id: z.string(),

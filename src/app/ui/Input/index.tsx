@@ -1,6 +1,6 @@
 import style from "./style.module.css";
 
-import { FormErrors } from "@/models/response.model";
+import { FormErrors } from "@/app/models/response.model";
 
 type Props = {
   label: string;
@@ -9,8 +9,9 @@ type Props = {
   className?: string;
   errors?: FormErrors;
   value?: any;
+  required?: boolean;
 };
-const Input = ({ label, name, value, errors, ...rest }: Props) => {
+const Input = ({ label, name, value, required, errors, ...rest }: Props) => {
   return (
     <div className={style.input}>
       <label htmlFor={name} className={style.label}>
@@ -23,6 +24,7 @@ const Input = ({ label, name, value, errors, ...rest }: Props) => {
           defaultValue={value}
           {...rest}
           aria-describedby={`${name}-error`}
+          required={required}
         />
       </div>
       {errors?.[name] ? (

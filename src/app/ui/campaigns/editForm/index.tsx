@@ -5,7 +5,7 @@ import { useFormState } from "react-dom";
 
 import style from "./style.module.css";
 
-import { FormState } from "@/models/response.model";
+import { FormState } from "@/app/models/response.model";
 
 import { updateCampaign } from "@/app/lib/campaigns/actions";
 
@@ -21,6 +21,7 @@ type Props = {
   end_date: string;
   status: string;
 };
+
 export default function CreateForm({
   _id,
   slug,

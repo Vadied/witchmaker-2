@@ -10,6 +10,7 @@ const Navbar = () => {
       <div className={style.links}>
         <Link href="/campaigns">Campaigns</Link>
         <Link href="/characters">Characters</Link>
+        <Link href="/login">Logout</Link>
       </div>
     </div>
   );

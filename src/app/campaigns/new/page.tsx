@@ -1,7 +1,7 @@
 import style from "./style.module.css";
 
 import Breadcrumbs from "@/app/ui/breadcrumbs";
-import Form from "@/app/ui/campaings/createForm";
+import Form from "@/app/ui/campaigns/createForm";
 
 type Props = {};
 const Page = ({}: Props) => {
