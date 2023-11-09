@@ -4,11 +4,11 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import connect from "@/app/lib/db/database";
-import { createSlug } from "@/app/lib/utils";
+import connect from "@/lib/db/database";
+import { createSlug } from "@/lib/utils";
 
-import { Campaign } from "@/app/schemas/Campaign";
-import { FormState, Reference } from "@/app/models/response.model";
+import { Campaign } from "@/schemas/Campaign";
+import { FormState, Reference } from "@/models/response.model";
 
 const FormSchema = z.object({
   id: z.string(),

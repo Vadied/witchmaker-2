@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import style from "./style.module.css";
 
-import { deleteCampaign } from "@/app/lib/campaigns/actions";
+import { deleteCampaign } from "@/lib/campaigns/actions";
 
-import Button from "@/app/ui/button";
+import Button from "@/ui/button";
 
 type Props = {
   _id: string;

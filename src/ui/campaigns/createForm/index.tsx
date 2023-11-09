@@ -5,12 +5,12 @@ import { useFormState } from "react-dom";
 
 import style from "./style.module.css";
 
-import { FormState } from "@/app/models/response.model";
+import { FormState } from "@/models/response.model";
 
-import { createCampaign } from "@/app/lib/campaigns/actions";
+import { createCampaign } from "@/lib/campaigns/actions";
 
-import Button from "@/app/ui/button";
-import Input from "@/app/ui/Input";
+import Button from "@/ui/button";
+import Input from "@/ui/Input";
 
 export default function CreateForm() {
   const initialState: FormState = { message: null, errors: {} };

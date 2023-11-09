@@ -8,6 +8,12 @@
   border-radius: 5px;
 }
 
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
 .input {
   margin: 10px 0;
   padding: 10px;
@@ -21,4 +27,10 @@
   color: red;
   font-size: 0.8rem;
   border: 1px dotted red;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }

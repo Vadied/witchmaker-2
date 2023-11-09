@@ -3,11 +3,11 @@
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
-import connect from "@/app/lib/db/database";
-import { createSlug } from "@/app/lib/utils";
+import connect from "@/lib/db/database";
+import { createSlug } from "@/lib/utils";
 
-import { FormState } from "@/app/models/response.model";
-import { User } from "@/app/schemas/User";
+import { FormState } from "@/models/response.model";
+import { User } from "@/schemas/User";
 
 const getSlug = async (): Promise<string> => {
   const slug = createSlug();

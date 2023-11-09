@@ -1,8 +1,8 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-import connect from "@/app/lib/db/database";
+import connect from "@/lib/db/database";
 
-import { User } from "@/app/schemas/User";
+import { User } from "@/schemas/User";
 
 export const getUser = async (email: string) => {
   noStore();

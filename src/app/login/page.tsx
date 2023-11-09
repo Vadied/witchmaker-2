@@ -1,8 +1,8 @@
 import style from "./style.module.css";
 
-import LoginForm from "@/app/ui/users/loginForm";
+import LoginForm from "@/ui/users/loginForm";
 
-export default function LoginPage() {
+export default function Page() {
   return (
     <main className={style.container}>
       <div className={style.panel}>

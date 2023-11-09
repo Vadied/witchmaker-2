@@ -2,12 +2,12 @@ import { Suspense } from "react";
 
 import style from "./style.module.css";
 
-import { fetchCampaignsPages } from "@/app/lib/campaigns/data";
+import { fetchCampaignsPages } from "@/lib/campaigns/data";
 
-import CampaignList from "@/app/ui/campaigns/list";
-import Search from "@/app/ui/search";
-import Pagination from "@/app/ui/pagination";
-import Button from "@/app/ui/button";
+import CampaignList from "@/ui/campaigns/list";
+import Search from "@/ui/search";
+import Pagination from "@/ui/pagination";
+import Button from "@/ui/button";
 import Link from "next/link";
 
 type Props = {

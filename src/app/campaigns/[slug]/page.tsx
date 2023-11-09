@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 
-import Breadcrumbs from "@/app/ui/breadcrumbs";
+import Breadcrumbs from "@/ui/breadcrumbs";
 import style from "./style.module.css";
 
-import { getCampaign } from "@/app/lib/campaigns/data";
+import { getCampaign } from "@/lib/campaigns/data";
 
 type Props = { params: { slug: string } };
 const Page = async ({ params }: Props) => {

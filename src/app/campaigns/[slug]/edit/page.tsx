@@ -1,11 +1,11 @@
 import style from "./style.module.css";
 
-import { getCampaign } from "@/app/lib/campaigns/data";
+import { getCampaign } from "@/lib/campaigns/data";
 
-import { TCampaign } from "@/app/models/campaign.model";
+import { TCampaign } from "@/models/campaign.model";
 
-import Breadcrumbs from "@/app/ui/breadcrumbs";
-import Form from "@/app/ui/campaigns/editForm";
+import Breadcrumbs from "@/ui/breadcrumbs";
+import Form from "@/ui/campaigns/editForm";
 
 type Props = { params: { slug: string } };
 const Page = async ({ params }: Props) => {

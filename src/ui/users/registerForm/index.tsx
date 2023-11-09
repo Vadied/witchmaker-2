@@ -2,22 +2,20 @@
 
 import Link from "next/link";
 import { useFormState, useFormStatus } from "react-dom";
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import style from "./style.module.css";
 
-import { FormState } from "@/app/models/response.model";
+import { FormState } from "@/models/response.model";
 
-import { createUser } from "@/app/lib/users/actions";
+import { createUser } from "@/lib/users/actions";
 
-import Button from "@/app/ui/button";
-import Input from "@/app/ui/Input";
+import Button from "@/ui/button";
+import Input from "@/ui/Input";
 
 export default function RegisterForm() {
   const initialState: FormState = { message: null, errors: {} };
   const { pending } = useFormStatus();
   const [state, action] = useFormState(createUser, initialState);
 
-  console.log("register", state);
   return (
     <form action={action} className={style.form}>
       <h1>Please register your user.</h1>
@@ -61,6 +59,7 @@ export default function RegisterForm() {
           <button type="submit">Register</button>
         </Button>
       </div>
+      
     </form>
   );
 }

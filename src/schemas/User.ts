@@ -38,6 +38,8 @@ const schema = new Schema(
   { timestamps: true }
 );
 
+console.log("schema", schema);
+
 schema.plugin(autopopulate);
 
 export const User = mongoose.models.User || mongoose.model("User", schema);

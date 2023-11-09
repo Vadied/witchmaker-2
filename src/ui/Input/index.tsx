@@ -1,6 +1,6 @@
 import style from "./style.module.css";
 
-import { FormErrors } from "@/app/models/response.model";
+import { FormErrors } from "@/models/response.model";
 
 type Props = {
   label: string;

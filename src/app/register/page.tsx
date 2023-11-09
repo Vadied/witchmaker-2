@@ -1,8 +1,8 @@
 import style from "./style.module.css";
 
-import RegisterForm from "@/app/ui/users/registerForm";
+import RegisterForm from "@/ui/users/registerForm";
 
-export default function LoginPage() {
+export default function Page() {
   return (
     <main className={style.container}>
       <div className={style.panel}>

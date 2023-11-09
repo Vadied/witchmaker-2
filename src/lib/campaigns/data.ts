@@ -1,10 +1,10 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-import connect from "@/app/lib/db/database";
+import connect from "@/lib/db/database";
 
-import { Campaign } from "@/app/schemas/Campaign";
+import { Campaign } from "@/schemas/Campaign";
 
-import { ITEMS_PER_PAGE } from "@/app/assets/constants";
+import { ITEMS_PER_PAGE } from "@/assets/constants";
 
 export const getCampaigns = async () => {
   // Add noStore() here prevent the response from being cached.

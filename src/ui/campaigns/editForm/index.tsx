@@ -5,12 +5,12 @@ import { useFormState } from "react-dom";
 
 import style from "./style.module.css";
 
-import { FormState } from "@/app/models/response.model";
+import { FormState } from "@/models/response.model";
 
-import { updateCampaign } from "@/app/lib/campaigns/actions";
+import { updateCampaign } from "@/lib/campaigns/actions";
 
-import Button from "@/app/ui/button";
-import Input from "@/app/ui/Input";
+import Button from "@/ui/button";
+import Input from "@/ui/Input";
 
 type Props = {
   _id: string;

@@ -4,7 +4,7 @@ import { z } from "zod";
 import bcrypt from "bcryptjs-react";
 
 import { authConfig } from "./auth.config";
-import { getUser } from "@/app/lib/users/data";
+import { getUser } from "@/lib/users/data";
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,

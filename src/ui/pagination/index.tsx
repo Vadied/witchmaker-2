@@ -4,7 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 import style from "./Pagination.module.css";
 
-import { generatePagination } from "@/app/lib/utils";
+import { generatePagination } from "@/lib/utils";
 import PaginationNumber from "./PaginationNumber";
 import PaginationArrow from "./PaginationArrow";
 
