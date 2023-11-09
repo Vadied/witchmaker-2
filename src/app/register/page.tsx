@@ -1,12 +1,12 @@
 import style from "./style.module.css";
 
-import LoginForm from "@/app/ui/users/loginForm";
+import RegisterForm from "@/app/ui/users/registerForm";
 
 export default function LoginPage() {
   return (
     <main className={style.container}>
       <div className={style.panel}>
-        <LoginForm />
+        <RegisterForm />
       </div>
     </main>
   );

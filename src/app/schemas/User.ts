@@ -5,6 +5,11 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
   {
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     name: {
       type: String,
       required: true,
@@ -35,6 +40,4 @@ const schema = new Schema(
 
 schema.plugin(autopopulate);
 
-console.log("User schema created", mongoose.models.User);
-
-export const User =  mongoose.model("User", schema);
+export const User = mongoose.models.User || mongoose.model("User", schema);

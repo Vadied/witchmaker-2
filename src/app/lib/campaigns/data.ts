@@ -3,7 +3,6 @@ import { unstable_noStore as noStore } from "next/cache";
 import connect from "@/app/lib/db/database";
 
 import { Campaign } from "@/app/schemas/Campaign";
-import { TCampaign } from "@/app/models/campaign.model";
 
 import { ITEMS_PER_PAGE } from "@/app/assets/constants";
 
@@ -46,7 +45,7 @@ export const getCampaignsFiltered = async (
       .skip(offset)
       .limit(ITEMS_PER_PAGE);
 
-    return data as TCampaign[];
+    return data;
   } catch (error) {
     console.error("Database Error:", error);
     return [];

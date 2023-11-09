@@ -5,13 +5,21 @@ import { FormErrors } from "@/app/models/response.model";
 type Props = {
   label: string;
   name: string;
+  type?: string;
   placeholder?: string;
   className?: string;
   errors?: FormErrors;
   value?: any;
   required?: boolean;
 };
-const Input = ({ label, name, value, required, errors, ...rest }: Props) => {
+const Input = ({
+  label,
+  name,
+  value,
+  required,
+  type = "text",
+  errors,
+}: Props) => {
   return (
     <div className={style.input}>
       <label htmlFor={name} className={style.label}>
@@ -22,7 +30,7 @@ const Input = ({ label, name, value, required, errors, ...rest }: Props) => {
           id={name}
           name={name}
           defaultValue={value}
-          {...rest}
+          type={type}
           aria-describedby={`${name}-error`}
           required={required}
         />
