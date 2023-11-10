@@ -1,6 +1,6 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-import connect from "@/lib/db/database";
+import connect from "@/lib//database";
 
 import { Campaign } from "@/schemas/Campaign";
 

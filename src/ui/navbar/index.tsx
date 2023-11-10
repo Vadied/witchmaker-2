@@ -1,18 +1,64 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import {
+  signIn,
+  signOut,
+  useSession,
+  getProviders,
+  LiteralUnion,
+  ClientSafeProvider,
+} from "next-auth/react";
+import { BuiltInProviderType } from "next-auth/providers/index";
 import Link from "next/link";
+
 import style from "./Navbar.module.css";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+
+  const [providers, setProviders] = useState<Record<
+    LiteralUnion<BuiltInProviderType>,
+    ClientSafeProvider
+  > | null>(null);
+
+  const handleProviders = async () => {
+    const providers = await getProviders();
+    setProviders(providers);
+  };
+
+  useEffect(() => {
+    handleProviders();
+  }, []);
+
+  const handleLogout = () => {
+    signOut();
+  };
+
   return (
-    <div className={style.navbar}>
+    <nav className={style.navbar}>
       <div className={`${style.logo} center-content`}>
         <Link href="/">WitchMaker</Link>
       </div>
-      <div className={style.links}>
-        <Link href="/campaigns">Campaigns</Link>
-        <Link href="/characters">Characters</Link>
-        <Link href="/login">Logout</Link>
-      </div>
-    </div>
+      {session?.user && (
+        <div className={style.links}>
+          <Link href="/campaigns">Campaigns</Link>
+          <Link href="/characters">Characters</Link>
+          <button type="button" onClick={handleLogout}>
+            Sign out
+          </button>
+        </div>
+      )}
+      {!session?.user &&
+        providers &&
+        Object.values(providers).map((provider) => (
+          <div key={provider.name}>
+            <button type="button" onClick={() => signIn(provider.id)}>
+              Sign in with {provider.name}
+            </button>
+          </div>
+        ))}
+    </nav>
   );
 };
 

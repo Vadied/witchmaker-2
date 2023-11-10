@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-// track the connection
+
 let isConnected = false;
 const connectToDataBase = async () => {
   mongoose.set("strictQuery", true);
@@ -20,6 +20,8 @@ const connectToDataBase = async () => {
       useUnifiedTopology: true,
     });
     isConnected = true;
+
+    console.log("Database connected");
   } catch (error) {
     console.log(error);
   }

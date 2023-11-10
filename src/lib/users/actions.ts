@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
-import connect from "@/lib/db/database";
+import connect from "@/lib//database";
 import { createSlug } from "@/lib/utils";
 
 import { FormState } from "@/models/response.model";

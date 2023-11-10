@@ -4,7 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import connect from "@/lib/db/database";
+import connect from "@/lib//database";
 import { createSlug } from "@/lib/utils";
 
 import { Campaign } from "@/schemas/Campaign";

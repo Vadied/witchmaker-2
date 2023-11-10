@@ -1,36 +1,48 @@
 "use client";
 
+import { useState } from "react";
+import { useFormStatus } from "react-dom";
 import Link from "next/link";
-import { useFormState, useFormStatus } from "react-dom";
 import style from "./style.module.css";
 
 import { FormState } from "@/models/response.model";
-
-import { createUser } from "@/lib/users/actions";
 
 import Button from "@/ui/button";
 import Input from "@/ui/Input";
 
 export default function RegisterForm() {
-  const initialState: FormState = { message: null, errors: {} };
   const { pending } = useFormStatus();
-  const [state, action] = useFormState(createUser, initialState);
+  const [state, setState] = useState<FormState>({ message: null, errors: {} });
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const username = e.target.username.value;
+
+    const res = await fetch("/api/auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, username }),
+    });
+
+    if (res.status === 200) {
+      const { message } = await res.json();
+      setState({ message, errors: {} });
+    } else {
+      const { errors } = await res.json();
+      setState({ message: null, errors });
+    }
+  };
 
   return (
-    <form action={action} className={style.form}>
+    <form onSubmit={handleSubmit} className={style.form}>
       <h1>Please register your user.</h1>
       <div className={style.inputs}>
         <Input
-          label="Name"
-          name="name"
-          placeholder="Enter your email address"
-          errors={state.errors}
-          required
-        />
-        <Input
-          label="Surname"
-          name="surname"
-          placeholder="Enter your email address"
+          label="Username"
+          name="username"
+          placeholder="Enter your username"
           errors={state.errors}
           required
         />
@@ -59,7 +71,6 @@ export default function RegisterForm() {
           <button type="submit">Register</button>
         </Button>
       </div>
-      
     </form>
   );
 }

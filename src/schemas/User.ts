@@ -1,24 +1,9 @@
-import mongoose from "mongoose";
+import { Schema, models, model } from "mongoose";
 import autopopulate from "mongoose-autopopulate";
-
-const { Schema } = mongoose;
 
 const schema = new Schema(
   {
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    surname: {
-      type: String,
-      required: true,
-    },
-    password: {
+    username: {
       type: String,
       required: true,
     },
@@ -27,19 +12,22 @@ const schema = new Schema(
       required: true,
       unique: true,
     },
-    roles: [String],
+    roles: {
+      type: [String],
+      required: true,
+      default: ["user"],
+    },
     characters: [
       {
         type: Schema.Types.ObjectId,
         ref: "Character",
+        default: [],
       },
     ],
   },
   { timestamps: true }
 );
 
-console.log("schema", schema);
-
 schema.plugin(autopopulate);
 
-export const User = mongoose.models.User || mongoose.model("User", schema);
+export const User = models.User || model("User", schema);
