@@ -12,6 +12,7 @@ const schema = new Schema(
       required: true,
       unique: true,
     },
+    image: String,
     roles: {
       type: [String],
       required: true,

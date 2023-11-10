@@ -13,6 +13,7 @@ import { BuiltInProviderType } from "next-auth/providers/index";
 import Link from "next/link";
 
 import style from "./Navbar.module.css";
+import Image from "next/image";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -47,6 +48,7 @@ const Navbar = () => {
           <button type="button" onClick={handleLogout}>
             Sign out
           </button>
+          <Image src={session.user.image} alt="profile" width={37} height={37} />
         </div>
       )}
       {!session?.user &&
